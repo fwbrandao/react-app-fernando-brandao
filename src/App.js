@@ -4,7 +4,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import NavBar from './components/navBar/navBar';
-import SmallTransactionTable from './components/transactionsTable/smallTransactionTable';
+import SmallTransactionTable from './components/transactionsTable/smallDataset/smallTransactionTable';
 
 const useStyles = makeStyles(theme => ({
   transactionTable: {
