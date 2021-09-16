@@ -1,18 +1,12 @@
 import React from 'react';
 import {
-    Avatar,
     AppBar,
     Button,
-    Box,
-    Drawer,
-    Divider,
     Typography,
     Toolbar,
     makeStyles,
-    useTheme,
-    Tooltip,
-    IconButton,
 } from '@material-ui/core';
+
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
@@ -31,7 +25,7 @@ const NavBar = () => {
         <AppBar position="static">
             <Toolbar>
                 <Typography variant="h6" className={classes.title}>
-                    Transactions Dashboard
+                    DeFi Transactions Dashboard
                 </Typography>
                 <Button color="inherit">Fetch data</Button>
             </Toolbar>
