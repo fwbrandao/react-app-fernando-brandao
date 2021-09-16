@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { 
   Box, 
@@ -12,7 +12,7 @@ import {
   Paper
 }from '@material-ui/core';
 import uniqid from 'uniqid';
-import moment from 'moment';
+import { TransactionsContext } from '../../../context/transactionsContext/transactionsContext';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -47,8 +47,9 @@ const useStyles = makeStyles({
 
 export default function SmallTransactionTable() {
   const classes = useStyles();
-
+  const { formatDateTime, createData }= useContext(TransactionsContext);
   const [smallData, setSmallData] = useState([]);
+
 
   useEffect(() => {
     fetch("http://localhost:3000/transactions-small.json") // Fetch small dataset
@@ -60,10 +61,6 @@ export default function SmallTransactionTable() {
       });
   }, []);
 
-  function createData(user_id, timestamp, currency, amount) {
-    return { user_id, timestamp, currency, amount };
-  }
-
   const rows =
     smallData.map(data => createData(
       data.user_id,
@@ -71,11 +68,6 @@ export default function SmallTransactionTable() {
       data.currency,
       data.amount
     ));
-
-  // Format timestamp
-  const formatDateTime = (timestamp) => {
-    return moment(timestamp).format('YYYY-MM-DD');
-  }
 
   // Format the color for negative or positive values
   const formatAmount = (amount) => {

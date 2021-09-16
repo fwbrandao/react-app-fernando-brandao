@@ -4,13 +4,14 @@ import {
   makeStyles
 } from '@material-ui/core';
 import NavBar from './components/navBar/navBar';
-import SmallTransactionTable from './components/transactionsTable/smallDataset/smallTransactionTable';
+import SmallTransactionsTable from './components/transactionsTable/smallDataset/smallTransactionsTable';
 
 const useStyles = makeStyles(theme => ({
   transactionTable: {
     margin: '100px'
   }
 }));
+
 function App() {
   const classes = useStyles();
 
@@ -18,7 +19,7 @@ function App() {
     <Box>
       <NavBar />
       <Box className={classes.transactionTable}>
-        <SmallTransactionTable  />
+        <SmallTransactionsTable  />
       </Box>
     </Box>
   )
