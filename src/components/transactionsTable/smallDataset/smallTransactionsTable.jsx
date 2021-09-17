@@ -1,18 +1,19 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { 
-  Box, 
-  Typography, 
-  Table, 
+import {
+  Box,
+  Typography,
+  Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
   Paper
-}from '@material-ui/core';
+} from '@material-ui/core';
 import uniqid from 'uniqid';
 import { TransactionsContext } from '../../../context/transactionsContext/transactionsContext';
+import { FetchDataContext } from '../../../context/fetchDataContext/fetchDataContext';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -47,22 +48,11 @@ const useStyles = makeStyles({
 
 export default function SmallTransactionTable() {
   const classes = useStyles();
-  const { formatDateTime, createData }= useContext(TransactionsContext);
-  const [smallData, setSmallData] = useState([]);
-
-
-  useEffect(() => {
-    fetch("http://localhost:3000/transactions-small.json") // Fetch small dataset
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        setSmallData(data);
-      });
-  }, []);
+  const { formatDateTime, createData } = useContext(TransactionsContext);
+  const { smallData, mediumData } = useContext(FetchDataContext);
 
   const rows =
-    smallData.map(data => createData(
+    mediumData.map(data => createData(
       data.user_id,
       data.timestamp,
       data.currency,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { green, pink } from '@material-ui/core/colors';
+import { green, blue, red } from '@material-ui/core/colors';
 import Avatar from '@material-ui/core/Avatar';
 import EuroIcon from '@material-ui/icons/Euro';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
@@ -15,11 +15,11 @@ const useStyles = makeStyles((theme) => ({
   },
   red: {
     color: '#fff',
-    backgroundColor: 'red',
+    backgroundColor: red[500],
   },
   blue: {
     color: '#fff',
-    backgroundColor: 'blue',
+    backgroundColor: blue[500],
   },
   green: {
     color: '#fff',
