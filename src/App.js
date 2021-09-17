@@ -12,7 +12,9 @@ const useStyles = makeStyles(theme => ({
     margin: '100px'
   },
   userWalletComponent: {
-    margin: '50px 100px'
+    margin: '50px 100px',
+    height: '30%',
+    backgroundColor: theme.palette.grey[100]
   }
 }));
 

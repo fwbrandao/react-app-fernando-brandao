@@ -3,24 +3,22 @@ import React from 'react';
 import { Box, InputBase, Typography } from '@material-ui/core';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import UserBalance from '../../core/userBalance/userBalance';
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    marginBottom: theme.spacing(1)
+    margin: theme.spacing(2)
   },
   search: {
+    top: '10px',
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    backgroundColor: 'white',
     '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
+      backgroundColor: alpha(theme.palette.common.white, 0.65),
     },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      // marginLeft: theme.spacing(1),
-      width: 'auto',
-    },
+    margin: 'auto',
+    width: '50%',
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -31,18 +29,15 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  inputRoot: {
+    color: 'inherit',
+    width: '100%'
+  },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '50ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
   },
 }));
 
@@ -50,10 +45,7 @@ const UserWallet = () => {
   const classes = useStyles();
 
   return (
-    <Box>
-      <Typography className={classes.title} variant="h6">
-        User Wallet
-      </Typography>
+    <Box className={classes.root}>
       <div className={classes.search}>
         <div className={classes.searchIcon}>
           <SearchIcon />
@@ -67,6 +59,10 @@ const UserWallet = () => {
           inputProps={{ 'aria-label': 'search' }}
         />
       </div>
+      <Typography className={classes.title} variant="h6">
+        User Wallet
+      </Typography>
+      <UserBalance />
     </Box>
   )
 };
