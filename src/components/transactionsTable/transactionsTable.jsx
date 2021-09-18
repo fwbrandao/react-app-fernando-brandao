@@ -9,11 +9,12 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper
+  Paper,
+  TablePagination
 } from '@material-ui/core';
 import uniqid from 'uniqid';
-import { TransactionsContext } from '../../../context/transactionsContext/transactionsContext';
-import { FetchDataContext } from '../../../context/fetchDataContext/fetchDataContext';
+import { TransactionsContext } from '../../context/transactionsContext/transactionsContext';
+import { FetchDataContext } from '../../context/fetchDataContext/fetchDataContext';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -46,13 +47,24 @@ const useStyles = makeStyles({
   }
 });
 
-export default function SmallTransactionTable() {
+export default function TransactionTable() {
   const classes = useStyles();
   const { formatDateTime, createData } = useContext(TransactionsContext);
-  const { smallData, mediumData } = useContext(FetchDataContext);
+  const { allData } = useContext(FetchDataContext);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   const rows =
-    mediumData.map(data => createData(
+    allData.map(data => createData(
       data.user_id,
       data.timestamp,
       data.currency,
@@ -67,7 +79,7 @@ export default function SmallTransactionTable() {
   return (
     <Box>
       <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-        Small Dataset
+        All Transactions
       </Typography>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="customized table">
@@ -81,7 +93,7 @@ export default function SmallTransactionTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
               <StyledTableRow key={uniqid()}>
                 <StyledTableCell
                   align="left"
@@ -116,6 +128,15 @@ export default function SmallTransactionTable() {
           </TableBody>
         </Table>
       </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </Box>
   );
 }

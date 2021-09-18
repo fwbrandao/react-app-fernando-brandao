@@ -4,8 +4,8 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import NavBar from './components/navBar/navBar';
-import SmallTransactionsTable from './components/transactionsTable/smallDataset/smallTransactionsTable';
 import UserWallet from './components/userWallet/userWallet';
+import TransactionsTable from './components/transactionsTable/transactionsTable';
 
 const useStyles = makeStyles(theme => ({
   transactionsTableComponent: {
@@ -28,7 +28,7 @@ function App() {
         <UserWallet />
       </Box>
       <Box className={classes.transactionsTableComponent}>
-        <SmallTransactionsTable />
+        <TransactionsTable />
       </Box>
     </Box>
   )

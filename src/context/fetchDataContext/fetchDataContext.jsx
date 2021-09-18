@@ -6,7 +6,7 @@ const FetchDataProvider = (props) => {
   const [smallData, setSmallData] = useState([]);
   const [mediumData, setMediumData] = useState([]);
   const [largeData, setLargeData] = useState([]);
-  const [allData, setAllData] = useState([]);
+  let allData = [];
 
 
   useEffect(() => {
@@ -39,10 +39,29 @@ const FetchDataProvider = (props) => {
       });
   }, []);
 
-    
+  // Concat all datasets
+  allData = [...smallData, ...mediumData, ...largeData];
+
+  const uniqueUsersIds = smallData
+    .map(e => e['user_id'])
+    .map((e, i, final) => final.indexOf(e) === i && i)
+    .filter(obj => smallData[obj])
+    .map(e => smallData[e]);
+
+  const duplicateUsersIds = smallData
+    .map(e => e['user_id'])
+    .map((e, i, final) => final.indexOf(e) !== i && i)
+    .filter(obj => smallData[obj])
+    .map(e => smallData[e]["user_id"]);
+
+  const duplicateTimestamps = allData
+    .map(e => e['timestamp'])
+    .map((e, i, final) => final.indexOf(e) !== i && i)
+    .filter(obj => allData[obj])
+    .map(e => allData[e]["timestamp"]);
 
   return (
-    <FetchDataContext.Provider value={{ smallData, mediumData, largeData, allData }}>
+    <FetchDataContext.Provider value={{ allData }}>
       {props.children}
     </FetchDataContext.Provider>
   );
