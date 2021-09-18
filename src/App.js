@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Box,
   makeStyles,
@@ -6,6 +6,7 @@ import {
 import NavBar from './components/navBar/navBar';
 import UserWallet from './components/userWallet/userWallet';
 import TransactionsTable from './components/transactionsTable/transactionsTable';
+import { FetchDataContext } from './context/fetchDataContext/fetchDataContext';
 
 const useStyles = makeStyles(theme => ({
   transactionsTableComponent: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles(theme => ({
 
 function App() {
   const classes = useStyles();
+  const { allData } = useContext(FetchDataContext);
 
   return (
     <Box>
@@ -28,7 +30,9 @@ function App() {
         <UserWallet />
       </Box>
       <Box className={classes.transactionsTableComponent}>
-        <TransactionsTable />
+        <TransactionsTable
+          data={allData}
+          title="All Transactions" />
       </Box>
     </Box>
   )

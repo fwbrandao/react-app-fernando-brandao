@@ -1,14 +1,24 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { Avatar, Box, makeStyles, Typography } from '@material-ui/core';
 import { green, blue, red } from '@material-ui/core/colors';
-import Avatar from '@material-ui/core/Avatar';
 import EuroIcon from '@material-ui/icons/Euro';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  title: {
     display: 'flex',
+    justifyContent: "end",
+    alignItems: "center",
+    margin: theme.spacing(1, 22, 1, 0),
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  balances: {
+    display: 'flex',
+    justifyContent: "end",
+    alignItems: "center",
+    margin: theme.spacing(1, 0, 1, 0),
     '& > *': {
       margin: theme.spacing(1),
     },
@@ -27,23 +37,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function UserBalance() {
+export default function UserBalance({
+  poundBalance,
+  dollarBalance,
+  euroBalance,
+}) {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <Avatar className={classes.red}>
-        GBP
-      </Avatar>
-      <Typography>100</Typography>
-      <Avatar className={classes.green}>
-        <AttachMoneyIcon />
-      </Avatar>
-      <Typography>100</Typography>
-      <Avatar className={classes.blue}>
-        <EuroIcon />
-      </Avatar>
-      <Typography>100</Typography>
-    </div>
+    <Box className={classes.root}>
+      <Typography className={classes.title}>Current Balance</Typography>
+      <Box className={classes.balances}>
+        <Avatar className={classes.red}>
+          GBP
+        </Avatar>
+        <Typography>100</Typography>
+        <Avatar className={classes.green}>
+          <AttachMoneyIcon />
+        </Avatar>
+        <Typography>100</Typography>
+        <Avatar className={classes.blue}>
+          <EuroIcon />
+        </Avatar>
+        <Typography>100</Typography>
+      </Box>
+    </Box>
   );
 }

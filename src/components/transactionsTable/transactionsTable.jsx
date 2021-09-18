@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import uniqid from 'uniqid';
 import { TransactionsContext } from '../../context/transactionsContext/transactionsContext';
-import { FetchDataContext } from '../../context/fetchDataContext/fetchDataContext';
+// import { FetchDataContext } from '../../context/fetchDataContext/fetchDataContext';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -47,10 +47,15 @@ const useStyles = makeStyles({
   }
 });
 
-export default function TransactionTable() {
+export default function TransactionTable({ data, title }) {
   const classes = useStyles();
+
+  if (!data) {
+    return
+  }
+
   const { formatDateTime, createData } = useContext(TransactionsContext);
-  const { allData } = useContext(FetchDataContext);
+  // const { allData } = useContext(FetchDataContext);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -64,7 +69,7 @@ export default function TransactionTable() {
   };
 
   const rows =
-    allData.map(data => createData(
+    data.map(data => createData(
       data.user_id,
       data.timestamp,
       data.currency,
@@ -79,7 +84,7 @@ export default function TransactionTable() {
   return (
     <Box>
       <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-        All Transactions
+        {title}
       </Typography>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="customized table">

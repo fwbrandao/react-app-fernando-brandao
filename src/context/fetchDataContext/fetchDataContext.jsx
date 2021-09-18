@@ -60,8 +60,14 @@ const FetchDataProvider = (props) => {
     .filter(obj => allData[obj])
     .map(e => allData[e]["timestamp"]);
 
+  // Filter transactions from unique user
+  const getUniqueUserData = (id) => {
+    const newData = smallData.filter(data => data.user_id === id)
+    return newData;
+  }
+
   return (
-    <FetchDataContext.Provider value={{ allData }}>
+    <FetchDataContext.Provider value={{ allData, getUniqueUserData }}>
       {props.children}
     </FetchDataContext.Provider>
   );
