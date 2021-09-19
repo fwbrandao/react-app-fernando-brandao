@@ -51,15 +51,15 @@ export default function UserBalance({
         <Avatar className={classes.red}>
           GBP
         </Avatar>
-        <Typography>100</Typography>
+        <Typography>{poundBalance.length ? poundBalance : " - "}</Typography>
         <Avatar className={classes.green}>
           <AttachMoneyIcon />
         </Avatar>
-        <Typography>100</Typography>
+        <Typography>{dollarBalance.length ? dollarBalance : " - - "}</Typography>
         <Avatar className={classes.blue}>
           <EuroIcon />
         </Avatar>
-        <Typography>100</Typography>
+        <Typography>{euroBalance.length ? euroBalance : " - - "}</Typography>
       </Box>
     </Box>
   );

@@ -45,7 +45,7 @@ const SearchBar = () => {
         <SearchIcon />
       </div>
       <InputBase
-        placeholder="Search for user…"
+        placeholder="Search for user id…"
         classes={{
           root: classes.inputRoot,
           input: classes.inputInput,

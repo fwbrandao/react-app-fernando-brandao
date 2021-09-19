@@ -20,8 +20,23 @@ const UserWallet = () => {
   let uniqueUserData = [];
   const [userId, setUserId] = useState("58b906e2-df1e-4b1c-a9c5-eced03801299");
   const { getUniqueUserData } = useContext(FetchDataContext);
+  let poundBalance = [];
+  let dollarBalance = [];
+  let euroBalance = [];
 
   uniqueUserData = getUniqueUserData(userId);
+
+  uniqueUserData.map(userData => {
+    if (userData.currency === 'GBP') {
+      poundBalance.push(userData.amount);
+    }
+    if (userData.currency === 'USD') {
+      dollarBalance.push(userData.amount);
+    }
+    if (userData.currency === 'EUR') {
+      euroBalance.push(userData.amount);
+    }
+  })
 
   return (
     <Box>
@@ -33,9 +48,9 @@ const UserWallet = () => {
         className={classes.transactionsTable}
       >
         <UserBalance
-          poundBalance
-          dollarBalance
-          euroBalance
+          poundBalance={poundBalance}
+          dollarBalance={dollarBalance}
+          euroBalance={euroBalance}
         />
         {uniqueUserData && uniqueUserData.length ? (
           <TransactionsTable
