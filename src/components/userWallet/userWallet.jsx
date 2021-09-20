@@ -12,7 +12,10 @@ const useStyles = makeStyles((theme) => ({
   },
   transactionsTable: {
     margin: theme.spacing(2)
-  }
+  },
+  searchBar: {
+    margin: theme.spacing(2)
+  },
 }));
 
 const UserWallet = () => {
@@ -43,7 +46,9 @@ const UserWallet = () => {
       <Typography className={classes.title} variant="h6">
         User Wallet
       </Typography>
-      <SearchBar />
+      <Box className={classes.searchBar}>
+        <SearchBar />
+      </Box>
       <Box
         className={classes.transactionsTable}
       >

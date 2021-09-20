@@ -1,59 +1,75 @@
+import React, { useContext } from 'react';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { FetchDataContext } from '../../context/fetchDataContext/fetchDataContext';
 
-import React from 'react';
-import { alpha, makeStyles, InputBase } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
+export default function SearchBar() {
+  const { allData } = useContext(FetchDataContext);
 
-const useStyles = makeStyles((theme) => ({
-  search: {
-    top: '10px',
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: 'white',
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.65),
-    },
-    margin: 'auto',
-    width: '50%',
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-    width: '100%'
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-  },
-}));
+  const [open, setOpen] = React.useState(false);
+  const [options, setOptions] = React.useState([]);
+  const [value, setValue] = React.useState(options[0]);
+  const loading = open && options.length === 0;
 
-const SearchBar = () => {
-  const classes = useStyles();
+  console.log('value', value)
+
+  React.useEffect(() => {
+    let active = true;
+
+    if (!loading) {
+      return undefined;
+    }
+
+    if (active) {
+      setOptions(allData.map((obj) => obj));
+    }
+
+    return () => {
+      active = false;
+    };
+  }, [loading]);
+
+  React.useEffect(() => {
+    if (!open) {
+      setOptions([]);
+    }
+  }, [open]);
 
   return (
-    <div className={classes.search}>
-      <div className={classes.searchIcon}>
-        <SearchIcon />
-      </div>
-      <InputBase
-        placeholder="Search for user id…"
-        classes={{
-          root: classes.inputRoot,
-          input: classes.inputInput,
-        }}
-        inputProps={{ 'aria-label': 'search' }}
-      />
-    </div>
-  )
-};
-
-export default SearchBar;
+    <Autocomplete
+      id="search_for_user_id"
+      style={{ width: 500 }}
+      open={open}
+      onOpen={() => {
+        setOpen(true);
+      }}
+      onClose={() => {
+        setOpen(false);
+      }}
+      onChange={(event, newValue) => {
+        setValue(newValue);
+      }}
+      getOptionSelected={(option, value) => option.user_id === value.user_id}
+      getOptionLabel={(option) => option.user_id}
+      options={options}
+      loading={loading}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Search for user id…"
+          variant="outlined"
+          InputProps={{
+            ...params.InputProps,
+            endAdornment: (
+              <React.Fragment>
+                {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                {params.InputProps.endAdornment}
+              </React.Fragment>
+            ),
+          }}
+        />
+      )}
+    />
+  );
+}
