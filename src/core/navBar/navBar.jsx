@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     AppBar,
-    Button,
     Typography,
     Toolbar,
     makeStyles,
@@ -27,7 +26,6 @@ const NavBar = () => {
                 <Typography variant="h6" className={classes.title}>
                     DeFi Transactions Dashboard
                 </Typography>
-                <Button color="inherit">Fetch data</Button>
             </Toolbar>
         </AppBar>
     )
