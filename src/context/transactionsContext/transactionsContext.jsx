@@ -1,9 +1,10 @@
-import React, { } from 'react';
+import React, { createContext, useState } from 'react';
 import moment from 'moment';
 
-export const TransactionsContext = React.createContext(() => { });
+export const TransactionsContext = createContext(() => { });
 
 const TransactionsProvider = (props) => {
+  const [userId, setUserId] = useState("");
 
   // Formats the data with the correct fields
   const createData = (user_id, timestamp, currency, amount) => {
@@ -16,7 +17,9 @@ const TransactionsProvider = (props) => {
   }
 
   return (
-    <TransactionsContext.Provider value={{ formatDateTime, createData }}>
+    <TransactionsContext.Provider
+      value={{ formatDateTime, createData, setUserId, userId }}
+    >
       {props.children}
     </TransactionsContext.Provider>
   );

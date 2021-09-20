@@ -42,29 +42,30 @@ const FetchDataProvider = (props) => {
   // Concat all datasets
   allData = [...smallData, ...mediumData, ...largeData];
 
-  const uniqueUsersIds = smallData
-    .map(e => e['user_id'])
-    .map((e, i, final) => final.indexOf(e) === i && i)
-    .filter(obj => smallData[obj])
-    .map(e => smallData[e]);
-
-  const duplicateUsersIds = smallData
-    .map(e => e['user_id'])
-    .map((e, i, final) => final.indexOf(e) !== i && i)
-    .filter(obj => smallData[obj])
-    .map(e => smallData[e]["user_id"]);
-
-  const duplicateTimestamps = allData
-    .map(e => e['timestamp'])
-    .map((e, i, final) => final.indexOf(e) !== i && i)
-    .filter(obj => allData[obj])
-    .map(e => allData[e]["timestamp"]);
-
   // Filter transactions from unique user
   const getUniqueUserData = (id) => {
     const newData = smallData.filter(data => data.user_id === id)
     return newData;
   }
+
+  // TODO - verify if ids and timestumps are the same for 2 diferent transactions
+  // const uniqueUsersIds = smallData
+  //   .map(e => e['user_id'])
+  //   .map((e, i, final) => final.indexOf(e) === i && i)
+  //   .filter(obj => smallData[obj])
+  //   .map(e => smallData[e]);
+
+  // const duplicateUsersIds = smallData
+  //   .map(e => e['user_id'])
+  //   .map((e, i, final) => final.indexOf(e) !== i && i)
+  //   .filter(obj => smallData[obj])
+  //   .map(e => smallData[e]["user_id"]);
+
+  // const duplicateTimestamps = allData
+  //   .map(e => e['timestamp'])
+  //   .map((e, i, final) => final.indexOf(e) !== i && i)
+  //   .filter(obj => allData[obj])
+  //   .map(e => allData[e]["timestamp"]);
 
   return (
     <FetchDataContext.Provider value={{ allData, getUniqueUserData }}>

@@ -1,10 +1,11 @@
 
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Box, makeStyles, Typography } from '@material-ui/core';
 import UserBalance from '../../core/userBalance/userBalance';
 import SearchBar from '../../core/searchBar/searchBar';
 import TransactionsTable from '../transactionsTable/transactionsTable';
 import { FetchDataContext } from '../../context/fetchDataContext/fetchDataContext';
+import { TransactionsContext } from '../../context/transactionsContext/transactionsContext';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 const UserWallet = () => {
   const classes = useStyles();
   let uniqueUserData = [];
-  const [userId, setUserId] = useState("58b906e2-df1e-4b1c-a9c5-eced03801299");
+  const { userId } = useContext(TransactionsContext);
   const { getUniqueUserData } = useContext(FetchDataContext);
   let poundBalance = [];
   let dollarBalance = [];
@@ -29,16 +30,19 @@ const UserWallet = () => {
 
   uniqueUserData = getUniqueUserData(userId);
 
+  // Push all amounts into its correspondent currency array and
+  // convert it to int
   uniqueUserData.map(userData => {
     if (userData.currency === 'GBP') {
-      poundBalance.push(userData.amount);
+      poundBalance.push(Number(userData.amount));
     }
     if (userData.currency === 'USD') {
-      dollarBalance.push(userData.amount);
+      dollarBalance.push(Number(userData.amount));
     }
     if (userData.currency === 'EUR') {
-      euroBalance.push(userData.amount);
+      euroBalance.push(Number(userData.amount));
     }
+    return userData;
   })
 
   return (

@@ -1,5 +1,11 @@
 [
   {
+    "user_id": "58b906e2-df1e-4b1c-a9c5-eced03801299",
+    "timestamp": "2019-11-19T16:49:22Z",
+    "currency": "EUR",
+    "amount": "-604.56"
+  },
+  {
     "user_id": "b4521412-2eeb-43f3-a50d-be976b23189d",
     "timestamp": "2020-05-29T16:59:39Z",
     "currency": "GBP",
@@ -36,12 +42,6 @@
     "amount": "+380.19"
   },
   {
-    "user_id": "58b906e2-df1e-4b1c-a9c5-eced03801299",
-    "timestamp": "2019-11-19T16:49:22Z",
-    "currency": "EUR",
-    "amount": "-604.56"
-  },
-  {
     "user_id": "febdf476-bee6-4337-8347-3b2e501425c6",
     "timestamp": "2019-09-14T23:13:41Z",
     "currency": "EUR",
@@ -58,5 +58,17 @@
     "timestamp": "2020-03-14T18:40:29Z",
     "currency": "GBP",
     "amount": "-751.10"
+  },
+  {
+    "user_id": "58b906e2-df1e-4b1c-a9c5-eced03801299",
+    "timestamp": "2020-03-14T18:40:29Z",
+    "currency": "GBP",
+    "amount": "-751.10"
+  },
+  {
+    "user_id": "58b906e2-df1e-4b1c-a9c5-eced03801299",
+    "timestamp": "2020-03-14T18:40:29Z",
+    "currency": "GBP",
+    "amount": "751.10"
   }
 ]

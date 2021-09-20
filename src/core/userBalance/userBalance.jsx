@@ -4,10 +4,11 @@ import { green, blue, red } from '@material-ui/core/colors';
 import EuroIcon from '@material-ui/icons/Euro';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
+import sum from 'lodash/sum';
+
 const useStyles = makeStyles((theme) => ({
   title: {
     display: 'flex',
-    justifyContent: "end",
     alignItems: "center",
     margin: theme.spacing(1, 27, 1, 0),
     '& > *': {
@@ -16,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
   },
   balances: {
     display: 'flex',
-    justifyContent: "end",
     alignItems: "center",
     margin: theme.spacing(1, 0, 1, 0),
     '& > *': {
@@ -44,6 +44,11 @@ export default function UserBalance({
 }) {
   const classes = useStyles();
 
+  // Use lodash to sum up the values
+  const sumValues = (values) => {
+    return sum(values);
+  };
+
   return (
     <Box className={classes.root}>
       <Typography className={classes.title}>Current Balance</Typography>
@@ -51,15 +56,15 @@ export default function UserBalance({
         <Avatar className={classes.red}>
           GBP
         </Avatar>
-        <Typography>{poundBalance.length ? poundBalance : " - "}</Typography>
+        <Typography>{poundBalance.length ? sumValues(poundBalance) : " - - "}</Typography>
         <Avatar className={classes.green}>
           <AttachMoneyIcon />
         </Avatar>
-        <Typography>{dollarBalance.length ? dollarBalance : " - - "}</Typography>
+        <Typography>{dollarBalance.length ? sumValues(dollarBalance) : " - - "}</Typography>
         <Avatar className={classes.blue}>
           <EuroIcon />
         </Avatar>
-        <Typography>{euroBalance.length ? euroBalance : " - - "}</Typography>
+        <Typography>{euroBalance.length ? sumValues(euroBalance) : " - - "}</Typography>
       </Box>
     </Box>
   );

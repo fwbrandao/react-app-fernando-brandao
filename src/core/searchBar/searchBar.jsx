@@ -3,26 +3,28 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { FetchDataContext } from '../../context/fetchDataContext/fetchDataContext';
+import { TransactionsContext } from '../../context/transactionsContext/transactionsContext';
 
 export default function SearchBar() {
   const { allData } = useContext(FetchDataContext);
+  const { setUserId } = useContext(TransactionsContext);
 
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = React.useState([]);
-  const [value, setValue] = React.useState(options[0]);
   const loading = open && options.length === 0;
-
-  console.log('value', value)
 
   React.useEffect(() => {
     let active = true;
 
+    // adds delay loader
+    setTimeout(function () {
+      if (active) {
+        setOptions(allData.map((obj) => obj));
+      }
+    }, 500);
+
     if (!loading) {
       return undefined;
-    }
-
-    if (active) {
-      setOptions(allData.map((obj) => obj));
     }
 
     return () => {
@@ -41,6 +43,7 @@ export default function SearchBar() {
       id="search_for_user_id"
       style={{ width: 500 }}
       open={open}
+      disableClearable
       onOpen={() => {
         setOpen(true);
       }}
@@ -48,7 +51,7 @@ export default function SearchBar() {
         setOpen(false);
       }}
       onChange={(event, newValue) => {
-        setValue(newValue);
+        setUserId(newValue.user_id);
       }}
       getOptionSelected={(option, value) => option.user_id === value.user_id}
       getOptionLabel={(option) => option.user_id}
