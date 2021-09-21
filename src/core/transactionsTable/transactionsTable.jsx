@@ -14,7 +14,6 @@ import {
 } from '@material-ui/core';
 import uniqid from 'uniqid';
 import { TransactionsContext } from '../../context/transactionsContext/transactionsContext';
-// import { FetchDataContext } from '../../context/fetchDataContext/fetchDataContext';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -55,7 +54,6 @@ export default function TransactionTable({ data, title }) {
   }
 
   const { formatDateTime, createData } = useContext(TransactionsContext);
-  // const { allData } = useContext(FetchDataContext);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

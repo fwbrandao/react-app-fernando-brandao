@@ -1,6 +1,8 @@
-describe('<UserBalance />', () => {
+import React from 'react';
+import { render } from '@testing-library/react';
+import UserBalance from './userBalance';
 
-  it('should have a test', () => {
-    
-  })
+test('renders UserBalance', () => {
+  render(<UserBalance />);
+  // expect().toBeInTheDocument();
 });

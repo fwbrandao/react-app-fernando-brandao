@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import NavBar from './core/navBar/navBar';
 import UserWallet from './components/userWallet/userWallet';
-import TransactionsTable from './components/transactionsTable/transactionsTable';
+import TransactionsTable from './core/transactionsTable/transactionsTable';
 import { FetchDataContext } from './context/fetchDataContext/fetchDataContext';
 
 const useStyles = makeStyles(theme => ({

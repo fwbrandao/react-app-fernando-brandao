@@ -42,7 +42,7 @@ const FetchDataProvider = (props) => {
   // Concat all datasets
   allData = [...smallData, ...mediumData, ...largeData];
 
-  // Filter transactions from unique user
+  // Filter transactions for unique user
   const getUniqueUserData = (id) => {
     const newData = smallData.filter(data => data.user_id === id)
     return newData;

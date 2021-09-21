@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { Box, makeStyles, Typography } from '@material-ui/core';
 import UserBalance from '../../core/userBalance/userBalance';
 import SearchBar from '../../core/searchBar/searchBar';
-import TransactionsTable from '../transactionsTable/transactionsTable';
+import TransactionsTable from '../../core/transactionsTable/transactionsTable';
 import { FetchDataContext } from '../../context/fetchDataContext/fetchDataContext';
 import { TransactionsContext } from '../../context/transactionsContext/transactionsContext';
 

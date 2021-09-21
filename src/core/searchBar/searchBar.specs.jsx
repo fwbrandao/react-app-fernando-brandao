@@ -1,6 +1,8 @@
-describe('<SearchBar />', () => {
+import React from 'react';
+import { render } from '@testing-library/react';
+import SearchBar from './searchBar';
 
-  it('should have a test', () => {
-    
-  })
+test('renders SearchBar', () => {
+  render(<SearchBar />);
+  // expect().toBeInTheDocument();
 });
